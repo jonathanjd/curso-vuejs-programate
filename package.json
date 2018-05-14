@@ -1,0 +1,15 @@
+{
+  "name": "vuejs-diapositiva",
+  "version": "1.0.0",
+  "description": "Diapositiva del Curso VueJS - Programate 2018.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jonathan Duran",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.24.4",
+    "gulp": "^3.9.1",
+    "gulp-pug": "^4.0.1"
+  }
+}
