@@ -23,7 +23,9 @@ VueJS es un framework progresivo de javascript para construir interfaces web int
 *   Fundamentos
 
     *   Instalación
-    *   Plantilla
+    *   Instancia
+    *   Propiedades
+    *   Mostrar Datos
     *   Directivas
     *   Propiedades Computadas
     *   Métodos

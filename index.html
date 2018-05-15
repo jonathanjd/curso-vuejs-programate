@@ -47,7 +47,7 @@
           </section>
           <section>
             <h3>Fundamentos</h3>
-            <p>Instalación, Plantilla, Directivas, Propiedades Computadas, Métodos, Manejos de Estilos/Clases, Bloque Condicional, Listas, Eventos, Formularios.</p>
+            <p>Instalación, Instancia, Propiedades, Mostrar Datos, Directivas, Propiedades Computadas, Métodos, Manejos de Estilos/Clases, Bloque Condicional, Listas, Eventos, Formularios.</p>
           </section>
           <section>
             <h3>Componentes</h3>
@@ -94,6 +94,287 @@
             <li>Escalable</li>
             <li>Licencia MIT</li>
           </ul>
+        </section>
+        <section>
+          <section>
+            <h1>Fundamentos</h1>
+          </section>
+          <section>
+            <h3>Instalación #1</h3>
+            <p>Vía CDN</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;title&gt;Curso VueJS&lt;/title&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;!-- Vue CDN --&gt;
+    &lt;script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Instalación #2</h3>
+            <p><a href="https://vuejs.org/v2/guide/installation.html" target="_blank">Download</a></p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;title&gt;Curso VueJS&lt;/title&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- VueJS --&gt;
+    &lt;script src="js/vue.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Patrón MVVM</h3>
+            <p>Consiste en pasar datos desde el código javascript "MODELO" al código html "VISTA", de una manera sencilla, sin tener que tratar directamente con las etiquetas html desde javascript.</p>
+          </section>
+          <section>
+            <h3>Instancia de Vue</h3>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">new Vue();</code></pre>
+          </section>
+          <section>
+            <h3>Propiedades de Vue</h3>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">var app = new Vue({
+    el: '#app',
+
+    data: {
+
+        ciudad: 'Barcelona',
+        pais: 'Venezuela',
+
+    },
+
+    computed: {
+        dondeEstoy: function () {
+            return 'Estoy en ' + this.ciudad + ' ' + this.pais;
+        }
+    },
+
+    methods: {
+        mensajeCiudad: function () {
+            console.log('Soy la Ciudad de ' + this.ciudad);
+        }
+    },
+
+    mounted: function () {
+        this.mensajeCiudad();
+    }
+});</code></pre>
+          </section>
+          <section>
+            <h3>Propiedad el</h3>
+            <ul>
+              <li>Esta Propiedad determina el 
+                <u>TAG HTML</u> que operará nuestra instancia Vue.
+              </li>
+              <li>Cada Instancia de Vue apunta a un solo nodo html y sus hijos.</li>
+              <li>Podemos utilizar como selector una clase/id/etiqueta.</li>
+            </ul>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">var app = new Vue({
+    //Propiedad el
+    el: '#app' //Selector por ID
+});</code></pre>
+          </section>
+          <section>
+            <h3>Propiedad data</h3>
+            <p>Es un objeto con propiedades que podemos utilizar en nuestra instancia.</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">var app = new Vue({
+    el: '#app',
+    //Propiedad Data
+    data: {
+        ciudad: 'Barcelona',
+        pais: 'Venezuela',
+    },
+});</code></pre>
+          </section>
+          <section>
+            <h3>Mostrar Datos</h3>
+            <p>
+              <u>INTERPOLACIÓN:</u> Permite enlazar datos entre VueJS y el DOM. Utilizar las dobles llaves.
+            </p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;body&gt;
+    &lt;div id="app"&gt;
+        &lt;p&gt;Ciudad: {{ ciudad }}&lt;/p&gt;
+        &lt;p&gt;País: {{ pais }}&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;!-- VueJS --&gt;
+    &lt;script src="js/vue.js"&gt;&lt;/script&gt;
+    &lt;!-- Main --&gt;
+    &lt;script src="js/main.js"&gt;&lt;/script&gt;
+&lt;/body&gt;</code></pre>
+          </section>
+          <section data-menu-title="Hola Mundo" data-background-video="video/hola-mundo.mp4" data-background-video-loop="true">
+            <h3>Hola Mundo</h3>
+          </section>
+          <section>
+            <h1>Directivas</h1>
+          </section>
+          <section>
+            <h3>V-TEXT</h3>
+            <p>Muestra contenido textual dentro de un elemento.</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;div id="app"&gt;
+    &lt;h1 v-text="mensaje"&gt;&lt;/h1&gt;
+&lt;/div&gt;</code></pre>
+          </section>
+          <section>
+            <h3>V-HTML</h3>
+            <p>Muestra contenido textual dentro de un elemento(Acepta Código HTML).</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">var app = new Vue({
+    el: '#app',
+    data: {
+        titulo: '&lt;p&gt;Curso de VueJS&lt;/p&gt;'
+    }
+});</code></pre>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;div id="app"&gt;
+    &lt;h1 v-html="titulo"&gt;&lt;/h1&gt;
+&lt;/div&gt;</code></pre>
+          </section>
+          <section>
+            <h3>V-SHOW</h3>
+            <p>Permite Mostrar u Ocultar contenido de DOM.</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">var app = new Vue({
+    el: '#app',
+    data: {
+        mostrarTitulo: true,
+        mostrarSubtitulo: false
+    }
+});</code></pre>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;div id="app"&gt;
+    &lt;h1 v-show="mostrarTitulo"&gt;Curso de VueJS&lt;/h1&gt;
+    &lt;h3 v-show="mostrarSubtitulo"&gt;Framework de JavaScript&lt;/h3&gt;
+&lt;/div&gt;</code></pre>
+          </section>
+          <section>
+            <h3>V-IF</h3>
+            <p>Bloque Condicional</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;div id="app"&gt;
+    &lt;h1 v-if="mostrarTitulo"&gt;Curso de VueJS&lt;/h1&gt;
+    &lt;h3 v-if="mostrarSubtitulo"&gt;Framework de JavaScript&lt;/h3&gt;
+    &lt;h3 v-else&gt;No Tengo SubTítulo&lt;/h3&gt;
+&lt;/div&gt;</code></pre>
+          </section>
+          <section data-menu-title="V-FOR #1">
+            <h3>V-FOR</h3>
+            <p>Listas</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">var app = new Vue({
+    el: '#app',
+    data: {
+        cursos: ['Vuejs', 'Laravel', 'GitHub', 'Front-End'],
+        alumnos: [
+            { nombre: 'Maria', edad: 25 },
+            { nombre: 'Pedro', edad: 30 },
+            { nombre: 'Jose', edad: 18 }
+        ]
+    }
+});</code></pre>
+          </section>
+          <section data-menu-title="V-FOR #2">
+            <h3>V-FOR</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;div id="app"&gt;
+    &lt;ul&gt;
+        &lt;li v-for="curso in cursos"&gt;{{ curso }}&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;hr&gt;
+    &lt;ul&gt;
+        &lt;li v-for="alumno in alumnos"&gt;{{ alumno.nombre }} - Edad: {{ alumno.edad }}&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+          </section>
+          <section data-menu-title="V-FOR + Index">
+            <h3>V-FOR + Index</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;div id="app"&gt;
+    &lt;ul&gt;
+        &lt;li v-for="curso in cursos"&gt;{{ curso }}&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;hr&gt;
+    &lt;ul&gt;
+        &lt;li v-for="alumno in alumnos"&gt;{{ alumno.nombre }} - Edad: {{ alumno.edad }}&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+          </section>
+          <section data-menu-title="V-FOR PropertyName">
+            <h3>V-FOR + PropertyName</h3>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">var app = new Vue({
+    el: '#app',
+    data: {
+        profesor: {
+            nombre: 'Jonathan Duran',
+            edad: 31,
+            carrera: 'Desarrollo Web'
+        }
+    }
+});</code></pre>
+          </section>
+          <section>
+            <h3>V-BIND</h3>
+            <p>Permite vincular un Atributo HTML a un valor que tenemos en nuestro Modelo.</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">var app = new Vue({
+    el: '#app',
+    data: {
+        btnDisabled: true
+    }
+});</code></pre>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;div id="app"&gt;
+    &lt;!-- v-bind:nombreAtributo --&gt;
+    &lt;button v-bind:disabled="btnDisabled"&gt;Enviar Datos&lt;/button&gt;
+    &lt;!-- El Atajo : --&gt;
+    &lt;button :disabled="btnDisabled"&gt;Cancelar Datos&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Métodos</h3>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">var app = new Vue({
+    el: '#app',
+    data: {
+        msj: 'Buenos Días'
+    },
+    methods: {
+        mensajeAlert: function() {
+            alert(this.msj);
+        }
+    }
+});</code></pre>
+          </section>
+          <section data-menu-title="V-ON #1">
+            <h3>V-ON</h3>
+            <p>Manejar Evento</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;div id="app"&gt;
+    &lt;button v-on:click="mensajeAlert"&gt;Programate&lt;/button&gt;
+    &lt;button @click="mensajeAlert"&gt;Programate @&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+          </section>
+          <section data-menu-title="V-ON #2">
+            <h3>V-ON</h3>
+            <p>Manejar Evento</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">var app = new Vue({
+    el: '#app',
+    data: {
+        msj: 'Buenos Días'
+    },
+    methods: {
+        mensajeAlert: function(mensaje, event) {
+            console.log(event);
+            alert(mensaje);
+        }
+    }
+});</code></pre>
+          </section>
+          <section data-menu-title="V-ON #3">
+            <h3>V-ON</h3>
+            <p>Manejar Evento</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">&lt;div id="app"&gt;
+    &lt;button @click="mensajeAlert('Hola Programate', $event)"&gt;Programate @&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+          </section>
         </section>
       </div>
     </div>
