@@ -391,3 +391,319 @@ block main
                     |     &lt;button @click="mensajeAlert('Hola Programate', $event)"&gt;Programate @&lt;/button&gt;
                     | &lt;/div&gt;
 
+        section(data-menu-title="V-MODEL #1")
+            h3 V-MODEL
+            p Permite enlazar datos a través de la propiedad data.
+            pre
+                code(class="javascript" data-trim data-noescape)
+                    | var app = new Vue({
+                    |     el: '#app',
+                    |     data: {
+                    |         title: '',
+                    |         body: ''
+                    |     },
+                    | });
+
+        section(data-menu-title="V-MODEL #2")
+            h3 V-MODEL
+            p v-model
+            pre
+                code(class="html" data-trim data-noescape)
+                    | &lt;div id="app"&gt;
+                    |     &lt;h1&gt;Post&lt;/h1&gt;
+                    |     &lt;h3&gt;Title: {{ title }}&lt;/h3&gt;
+                    |     &lt;p&gt;Body: {{ body }}&lt;/p&gt;
+                    |     &lt;hr&gt;
+                    |     &lt;input type="text" v-model="title"&gt;
+                    |     &lt;br&gt;
+                    |     &lt;br&gt;
+                    |     &lt;textarea cols="21" rows="10" v-model="body"&gt;&lt;/textarea&gt;
+                    | &lt;/div&gt;
+
+        section
+            h3 V-ONCE
+            p Evita la reactividad en un elemento, lo convierte estático.
+            pre
+                code(class="html" data-trim data-noescape)
+                    | &lt;div id="app"&gt;
+                    |     &lt;h1&gt;Post&lt;/h1&gt;
+                    |     &lt;h3 v-once&gt;Title: {{ title }}&lt;/h3&gt;
+                    |     &lt;p&gt;Body: {{ body }}&lt;/p&gt;
+                    |     &lt;hr&gt;
+                    |     &lt;input type="text" v-model="title"&gt;
+                    |     &lt;br&gt;
+                    |     &lt;br&gt;
+                    |     &lt;textarea cols="21" rows="10" v-model="body"&gt;&lt;/textarea&gt;
+                    | &lt;/div&gt;
+
+        section(data-menu-title="Computed #1")
+            h3 Propiedades Calculadas
+            p Computed
+            pre
+                code(class="javascript" data-trim data-noescape)
+                    | var app = new Vue({
+                    |     el: '#app',
+                    |     data: {
+                    |         nombre: 'Carmen',
+                    |         apellido: 'Perez'
+                    |     },
+                    |     computed: {
+                    |         nombreCompleto: function () {
+                    |             return this.nombre + ' ' + this.apellido;
+                    |         }
+                    |     }
+                    | });
+
+        section(data-menu-title="Computed #2")
+            h3 Propiedades Calculadas
+            p Computed
+            pre
+                code(class="html" data-trim data-noescape)
+                    | &lt;div id="app"&gt;
+                    |     &lt;h1&gt;Usuario&lt;/h1&gt;
+                    |     {{ nombreCompleto }}
+                    | &lt;/div&gt;
+
+        section(data-menu-title="Filtros #1")
+            h3 Filtros
+            p
+                a(href="https://www.npmjs.com/package/vue-filter" target="_blank") Documentación
+            pre
+                code(class="javascript" data-trim data-noescape)
+                    | var app = new Vue({
+                    |     el: '#app',
+                    |     data: {
+                    |         pelicula: 'La Casa Vieja',
+                    |         entrada: 500,
+                    |     },
+                    |     filters: {
+                    |         toUSD: function (precio) {
+                    |             return '$' + precio;
+                    |         }
+                    |     },
+                    | });
+
+        section(data-menu-title="Filtros #2")
+            h3 Filtros
+            p
+                a(href="https://www.npmjs.com/package/vue-filter" target="_blank") Documentación
+            pre
+                code(class="html" data-trim data-noescape)
+                    | &lt;div id="app"&gt;
+                    |     &lt;h1&gt;{{ pelicula | uppercase }}&lt;/h1&gt;
+                    |     &lt;h3&gt;Precio {{ entrada | toUSD }}&lt;/h3&gt;
+                    | &lt;/div&gt;
+                    | &lt;!-- VueJS --&gt;
+                    | &lt;script src="js/vue.js"&gt;&lt;/script&gt;
+                    | &lt;!-- Vue Filter --&gt;
+                    | &lt;script src="js/vue-filter.js"&gt;&lt;/script&gt;
+                    | &lt;!-- Main --&gt;
+                    | &lt;script src="js/main.js"&gt;&lt;/script&gt;
+
+        section(data-menu-title="Estilos #1")
+            h3 Estilos
+            pre
+                code(class="javascript" data-trim data-noescape)
+                    | var app = new Vue({
+                    |     el: '#app',
+                    |     data: {
+                    |         color: 'blue'
+                    |     },
+                    |     methods: {
+                    |         cambiarColor() {
+                    |             if (this.color == 'blue') {
+                    |                 this.color = 'yellow';
+                    |             } else {
+                    |                 this.color = 'blue';
+                    |             }
+                    |         }
+                    |     }
+                    | });
+
+        section(data-menu-title="Estilos #2")
+            h3 Estilos
+            pre
+                code(class="html" data-trim data-noescape)
+                    | &lt;div id="app"&gt;
+                    |     &lt;div style="width: 200px; height: 200px;" v-bind:style="{ 'background-color': color}"&gt;&lt;/div&gt;
+                    |     &lt;button @click="cambiarColor"&gt;Cambiar Color&lt;/button&gt;
+                    | &lt;/div&gt;
+
+        section(data-menu-title="Estilos #3")
+            h3 Estilos
+            pre
+                code(class="javascript" data-trim data-noescape)
+                    | var app = new Vue({
+                    |     el: '#app',
+                    |     data: {
+                    |         color: 'blue',
+                    |         styles: {
+                    |             'background-color': 'red',
+                    |             width: '200px',
+                    |             height: '200px'
+                    |         }
+                    |     },
+                    |     methods: {
+                    |         cambiarColor() {
+                    |             if (this.color == 'blue') {
+                    |                 this.color = 'yellow';
+                    |             } else {
+                    |                 this.color = 'blue';
+                    |             }
+                    |         }
+                    |     }
+                    | });
+
+        section(data-menu-title="Estilos #4")
+            h3 Estilos
+            pre
+                code(class="html" data-trim data-noescape)
+                    | &lt;div id="app"&gt;
+                    |     &lt;div style="width: 200px; height: 200px;" v-bind:style="{ 'background-color': color}"&gt;&lt;/div&gt;
+                    |     &lt;button @click="cambiarColor"&gt;Cambiar Color&lt;/button&gt;
+                    |     &lt;div :style="styles"&gt;&lt;/div&gt;
+                    | &lt;/div&gt;
+
+        section
+            h1 Actividad
+
+    section
+        section
+            h1 Componetes
+            img(src="/img/bloque.png", alt="Componentes" height="250" width="250")
+
+        section(data-menu-title="Introducción #1")
+            h3 Introducción
+            p Registrar Componentes Globales
+            pre
+                code(class="javascript" data-trim data-noescape)
+                    | Vue.component('mi-bloque', {
+                    |     data: function () {
+                    |         return {
+                    |             mensaje: 'Soy un Componente'
+                    |         }
+                    |     },
+                    |     template: '&lt;p&gt;{{ mensaje }}&lt;/p&gt;'
+                    | });
+                    | var app = new Vue({
+                    |     el: '#app',
+                    | });
+
+        section(data-menu-title="Introducción #2")
+            h3 Introducción
+            pre
+                code(class="html" data-trim data-noescape)
+                    | &lt;div id="app"&gt;
+                    |     &lt;mi-bloque&gt;&lt;/mi-bloque&gt;
+                    | &lt;/div&gt;
+
+        section(data-menu-title="Introducción #3")
+            h3 Introducción
+            pre
+                code(class="javascript" data-trim data-noescape)
+                    | Vue.component('mi-bloque', {
+                    |     data: function () {
+                    |         return {
+                    |             mensaje: 'Soy un Componente'
+                    |         }
+                    |     },
+                    |     template: '&lt;p&gt;{{ mensaje }} &lt;button @click="alertMensaje"&gt;Ver Alert Mensaje&lt;/button&gt;&lt;/p&gt;',
+                    |     methods: {
+                    |         alertMensaje: function () {
+                    |             alert(this.mensaje);
+                    |         }
+                    |     }
+                    | });
+                    | var app = new Vue({
+                    |     el: '#app',
+                    | });
+
+        section(data-menu-title="Introducción #4")
+            h3 Introducción
+            pre
+                code(class="javascript" data-trim data-noescape)
+                    | var app = new Vue({
+                    |     el: '#app',
+                    |     components: {
+                    |         appButtonSave: {
+                    |             template: '&lt;button @click="save"&gt;Save&lt;/button&gt;',
+                    |             methods: {
+                    |                 save: function () {
+                    |                     alert('Saved');
+                    |                 }
+                    |             }
+                    |         }
+                    |     }
+                    | });
+
+        section(data-menu-title="Introducción #5")
+            h3 Introducción
+            p Componentes Locales
+            pre
+                code(class="html" data-trim data-noescape)
+                    | &lt;div id="app"&gt;
+                    |     &lt;app-button-save&gt;&lt;/app-button-save&gt;
+                    | &lt;/div&gt;
+
+        section(data-menu-title="DevTools")
+            h3 Herramienta de Desarrollo
+            p
+                a(href="https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd?hl=es" target="_blank") Para Chrome
+            p
+                a(href="https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/" target="_blank") Para Firefox
+
+        section
+            h3 Vue Cli
+            p
+                a(href="https://www.npmjs.com/package/vue-cli" target="_blank") Instalación
+            p npm install -g vue-cli
+            p Cli(Interfaz de Línea de Comandos)
+
+        section
+            h3 Init Template
+            p vue init webpack-simple myvue
+            ul
+                li cd myvue
+                li npm install
+                li run dev
+
+        section
+            h3 Vue Proyecto
+            img(src="/img/vue-project.png", alt="Vue Project")
+
+        section
+            h3 Vue App
+            img(src="/img/vue-app.png", alt="Vue App" width="320" height="300")
+
+        section
+            h3 Vue Index
+            pre
+                code(class="html" data-trim data-noescape)
+                    | &lt;!DOCTYPE html&gt;
+                    | &lt;html lang="en"&gt;
+                    | &lt;head&gt;
+                    |     &lt;meta charset="utf-8"&gt;
+                    |     &lt;title&gt;myvue&lt;/title&gt;
+                    | &lt;/head&gt;
+                    | &lt;body&gt;
+                    |     &lt;div id="app"&gt;&lt;/div&gt;
+                    |     &lt;script src="/dist/build.js"&gt;&lt;/script&gt;
+                    | &lt;/body&gt;
+                    | &lt;/html&gt;
+
+        section
+            h3 Vue Main
+            pre
+                code(class="javascript" data-trim data-noescape)
+                    | import Vue from 'vue'
+                    | import App from './App.vue'
+                    | new Vue({
+                    |     el: '#app',
+                    |     render: h => h(App)
+                    | })
+
+        section Single-File
+            h3 Single-File Components
+            img(src="/img/single-file.png", alt="Single File" width="250" height="300")
+
+

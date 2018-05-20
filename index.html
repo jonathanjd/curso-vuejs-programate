@@ -375,6 +375,278 @@
     &lt;button @click="mensajeAlert('Hola Programate', $event)"&gt;Programate @&lt;/button&gt;
 &lt;/div&gt;</code></pre>
           </section>
+          <section data-menu-title="V-MODEL #1">
+            <h3>V-MODEL</h3>
+            <p>Permite enlazar datos a través de la propiedad data.</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">var app = new Vue({
+    el: '#app',
+    data: {
+        title: '',
+        body: ''
+    },
+});</code></pre>
+          </section>
+          <section data-menu-title="V-MODEL #2">
+            <h3>V-MODEL</h3>
+            <p>v-model</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;div id="app"&gt;
+    &lt;h1&gt;Post&lt;/h1&gt;
+    &lt;h3&gt;Title: {{ title }}&lt;/h3&gt;
+    &lt;p&gt;Body: {{ body }}&lt;/p&gt;
+    &lt;hr&gt;
+    &lt;input type="text" v-model="title"&gt;
+    &lt;br&gt;
+    &lt;br&gt;
+    &lt;textarea cols="21" rows="10" v-model="body"&gt;&lt;/textarea&gt;
+&lt;/div&gt;</code></pre>
+          </section>
+          <section>
+            <h3>V-ONCE</h3>
+            <p>Evita la reactividad en un elemento, lo convierte estático.</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;div id="app"&gt;
+    &lt;h1&gt;Post&lt;/h1&gt;
+    &lt;h3 v-once&gt;Title: {{ title }}&lt;/h3&gt;
+    &lt;p&gt;Body: {{ body }}&lt;/p&gt;
+    &lt;hr&gt;
+    &lt;input type="text" v-model="title"&gt;
+    &lt;br&gt;
+    &lt;br&gt;
+    &lt;textarea cols="21" rows="10" v-model="body"&gt;&lt;/textarea&gt;
+&lt;/div&gt;</code></pre>
+          </section>
+          <section data-menu-title="Computed #1">
+            <h3>Propiedades Calculadas</h3>
+            <p>Computed</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">var app = new Vue({
+    el: '#app',
+    data: {
+        nombre: 'Carmen',
+        apellido: 'Perez'
+    },
+    computed: {
+        nombreCompleto: function () {
+            return this.nombre + ' ' + this.apellido;
+        }
+    }
+});</code></pre>
+          </section>
+          <section data-menu-title="Computed #2">
+            <h3>Propiedades Calculadas</h3>
+            <p>Computed</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;div id="app"&gt;
+    &lt;h1&gt;Usuario&lt;/h1&gt;
+    {{ nombreCompleto }}
+&lt;/div&gt;</code></pre>
+          </section>
+          <section data-menu-title="Filtros #1">
+            <h3>Filtros</h3>
+            <p><a href="https://www.npmjs.com/package/vue-filter" target="_blank">Documentación</a></p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">var app = new Vue({
+    el: '#app',
+    data: {
+        pelicula: 'La Casa Vieja',
+        entrada: 500,
+    },
+    filters: {
+        toUSD: function (precio) {
+            return '$' + precio;
+        }
+    },
+});</code></pre>
+          </section>
+          <section data-menu-title="Filtros #2">
+            <h3>Filtros</h3>
+            <p><a href="https://www.npmjs.com/package/vue-filter" target="_blank">Documentación</a></p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;div id="app"&gt;
+    &lt;h1&gt;{{ pelicula | uppercase }}&lt;/h1&gt;
+    &lt;h3&gt;Precio {{ entrada | toUSD }}&lt;/h3&gt;
+&lt;/div&gt;
+&lt;!-- VueJS --&gt;
+&lt;script src="js/vue.js"&gt;&lt;/script&gt;
+&lt;!-- Vue Filter --&gt;
+&lt;script src="js/vue-filter.js"&gt;&lt;/script&gt;
+&lt;!-- Main --&gt;
+&lt;script src="js/main.js"&gt;&lt;/script&gt;</code></pre>
+          </section>
+          <section data-menu-title="Estilos #1">
+            <h3>Estilos</h3>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">var app = new Vue({
+    el: '#app',
+    data: {
+        color: 'blue'
+    },
+    methods: {
+        cambiarColor() {
+            if (this.color == 'blue') {
+                this.color = 'yellow';
+            } else {
+                this.color = 'blue';
+            }
+        }
+    }
+});</code></pre>
+          </section>
+          <section data-menu-title="Estilos #2">
+            <h3>Estilos</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;div id="app"&gt;
+    &lt;div style="width: 200px; height: 200px;" v-bind:style="{ 'background-color': color}"&gt;&lt;/div&gt;
+    &lt;button @click="cambiarColor"&gt;Cambiar Color&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+          </section>
+          <section data-menu-title="Estilos #3">
+            <h3>Estilos</h3>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">var app = new Vue({
+    el: '#app',
+    data: {
+        color: 'blue',
+        styles: {
+            'background-color': 'red',
+            width: '200px',
+            height: '200px'
+        }
+    },
+    methods: {
+        cambiarColor() {
+            if (this.color == 'blue') {
+                this.color = 'yellow';
+            } else {
+                this.color = 'blue';
+            }
+        }
+    }
+});</code></pre>
+          </section>
+          <section data-menu-title="Estilos #4">
+            <h3>Estilos</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;div id="app"&gt;
+    &lt;div style="width: 200px; height: 200px;" v-bind:style="{ 'background-color': color}"&gt;&lt;/div&gt;
+    &lt;button @click="cambiarColor"&gt;Cambiar Color&lt;/button&gt;
+    &lt;div :style="styles"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </section>
+          <section>
+            <h1>Actividad</h1>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Componetes</h1><img src="/img/bloque.png" alt="Componentes" height="250" width="250"/>
+          </section>
+          <section data-menu-title="Introducción #1">
+            <h3>Introducción</h3>
+            <p>Registrar Componentes Globales</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">Vue.component('mi-bloque', {
+    data: function () {
+        return {
+            mensaje: 'Soy un Componente'
+        }
+    },
+    template: '&lt;p&gt;{{ mensaje }}&lt;/p&gt;'
+});
+var app = new Vue({
+    el: '#app',
+});</code></pre>
+          </section>
+          <section data-menu-title="Introducción #2">
+            <h3>Introducción</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;div id="app"&gt;
+    &lt;mi-bloque&gt;&lt;/mi-bloque&gt;
+&lt;/div&gt;</code></pre>
+          </section>
+          <section data-menu-title="Introducción #3">
+            <h3>Introducción</h3>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">Vue.component('mi-bloque', {
+    data: function () {
+        return {
+            mensaje: 'Soy un Componente'
+        }
+    },
+    template: '&lt;p&gt;{{ mensaje }} &lt;button @click="alertMensaje"&gt;Ver Alert Mensaje&lt;/button&gt;&lt;/p&gt;',
+    methods: {
+        alertMensaje: function () {
+            alert(this.mensaje);
+        }
+    }
+});
+var app = new Vue({
+    el: '#app',
+});</code></pre>
+          </section>
+          <section data-menu-title="Introducción #4">
+            <h3>Introducción</h3>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">var app = new Vue({
+    el: '#app',
+    components: {
+        appButtonSave: {
+            template: '&lt;button @click="save"&gt;Save&lt;/button&gt;',
+            methods: {
+                save: function () {
+                    alert('Saved');
+                }
+            }
+        }
+    }
+});</code></pre>
+          </section>
+          <section data-menu-title="Introducción #5">
+            <h3>Introducción</h3>
+            <p>Componentes Locales</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;div id="app"&gt;
+    &lt;app-button-save&gt;&lt;/app-button-save&gt;
+&lt;/div&gt;</code></pre>
+          </section>
+          <section data-menu-title="DevTools">
+            <h3>Herramienta de Desarrollo</h3>
+            <p><a href="https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd?hl=es" target="_blank">Para Chrome</a></p>
+            <p><a href="https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/" target="_blank">Para Firefox</a></p>
+          </section>
+          <section>
+            <h3>Vue Cli</h3>
+            <p><a href="https://www.npmjs.com/package/vue-cli" target="_blank">Instalación</a></p>
+            <p>npm install -g vue-cli</p>
+            <p>Cli(Interfaz de Línea de Comandos)</p>
+          </section>
+          <section>
+            <h3>Init Template</h3>
+            <p>vue init webpack-simple myvue</p>
+            <ul>
+              <li>cd myvue</li>
+              <li>npm install</li>
+              <li>run dev</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Vue Proyecto</h3><img src="/img/vue-project.png" alt="Vue Project"/>
+          </section>
+          <section>
+            <h3>Vue App</h3><img src="/img/vue-app.png" alt="Vue App" width="320" height="300"/>
+          </section>
+          <section>
+            <h3>Vue Index</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;myvue&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="app"&gt;&lt;/div&gt;
+    &lt;script src="/dist/build.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Vue Main</h3>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">import Vue from 'vue'
+import App from './App.vue'
+new Vue({
+    el: '#app',
+    render: h => h(App)
+})</code></pre>
+          </section>
+          <section>Single-File
+            <h3>Single-File Components</h3><img src="/img/single-file.png" alt="Single File" width="250" height="300"/>
+          </section>
         </section>
       </div>
     </div>
