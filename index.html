@@ -525,6 +525,19 @@
 &lt;/div&gt;</code></pre>
           </section>
           <section>
+            <h3>V-Cloak</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;div id="app"&gt;
+    &lt;div v-cloak&gt;
+        Hello {{ name }}
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;style&gt;
+    [v-cloak] {
+        display: none;
+    }
+&lt;/style&gt;</code></pre>
+          </section>
+          <section>
             <h1>Actividad</h1>
           </section>
         </section>
@@ -646,6 +659,576 @@ new Vue({
           </section>
           <section>Single-File
             <h3>Single-File Components</h3><img src="/img/single-file.png" alt="Single File" width="250" height="300"/>
+          </section>
+          <section>
+            <h3>Crear Componentes</h3><img src="/img/crear-components1.png" alt="Crear-Components 1"/>
+          </section>
+          <section>
+            <h3>Componente Box1</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div&gt;
+   &lt;h1&gt;Componente Box1&lt;/h1&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {};
+&lt;/script&gt;
+
+&lt;style&gt;
+&lt;/style&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Componente Box2</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div&gt;
+   &lt;h1&gt;Componente Box2&lt;/h1&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {};
+&lt;/script&gt;
+
+&lt;style&gt;
+&lt;/style&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Componente App</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div&gt;
+    &lt;app-box1&gt;&lt;/app-box1&gt;
+    &lt;app-box2&gt;&lt;/app-box2&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import Box1 from './components/Box1';
+import Box2 from './components/Box2';
+export default {
+components: {
+    appBox1: Box1,
+    appBox2: Box2
+}
+};
+&lt;/script&gt;
+&lt;style&gt;
+&lt;/style&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Agregando Estilos</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div&gt;
+    &lt;div class="box effect1"&gt;
+    &lt;h1&gt;My Box App&lt;/h1&gt;
+    &lt;/div&gt;
+    &lt;app-box1&gt;&lt;/app-box1&gt;
+    &lt;app-box2&gt;&lt;/app-box2&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import Box1 from './components/Box1';
+import Box2 from './components/Box2';
+export default {
+components: {
+    appBox1: Box1,
+    appBox2: Box2
+}
+};
+&lt;/script&gt;
+&lt;style&gt;
+body {
+background: #ccc;
+}
+
+.box {
+width: 70%;
+height: 200px;
+background: #fff;
+margin: 40px auto;
+}
+
+.box h1 {
+text-align: center;
+position: relative;
+top: 80px;
+}
+
+.effect {
+box-shadow: 0 10px 6px -6px #777;
+}
+&lt;/style&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Scoped Style</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div class="box effect1"&gt;
+    &lt;h1&gt;Componente Box2&lt;/h1&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {};
+&lt;/script&gt;
+&lt;style scoped&gt;
+h1 {
+color: brown;
+}
+&lt;/style&gt;</code></pre>
+          </section>
+          <section data-menu-title="Comunicación">
+            <h1>Comunicación entre Componentes</h1>
+          </section>
+          <section data-menu-title="Props #1">
+            <h3>Usando Props</h3>
+            <p>App.vue</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div&gt;
+    &lt;div class="box effect"&gt;
+    &lt;h1&gt;{{ title }}&lt;/h1&gt;
+    &lt;/div&gt;
+    &lt;app-box1 :myApellido="apellido"&gt;&lt;/app-box1&gt;
+    &lt;app-box2 :myCaminarPadre="caminarPadre"&gt;&lt;/app-box2&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import Box1 from './components/Box1';
+import Box2 from './components/Box2';
+export default {
+data: function() {
+    return {
+    title: 'Componente Padre',
+    apellido: 'Apellido Padre'
+    };
+},
+methods: {
+    caminarPadre: function() {
+    alert('Caminando Estilo Papá');
+    }
+},
+components: {
+    appBox1: Box1,
+    appBox2: Box2
+}
+};
+&lt;/script&gt;</code></pre>
+          </section>
+          <section data-menu-title="Props #2">
+            <h3>Usando Props</h3>
+            <p>Box1.vue</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div class="box effect"&gt;
+    &lt;h1&gt;{{ title }} - {{ myApellido }}&lt;/h1&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+data: function() {
+    return {
+    title: 'Componente Hijo'
+    };
+},
+props: ['myApellido']
+};
+&lt;/script&gt;</code></pre>
+          </section>
+          <section data-menu-title="Props #3">
+            <h3>Usando Props</h3>
+            <p>Box2.vue</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div class="box effect"&gt;
+    &lt;h1&gt;Componente Hijo #2&lt;/h1&gt;
+    &lt;button @click="myCaminarPadre"&gt;Caminar Estilo Papá&lt;/button&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+props: ['myCaminarPadre']
+};
+&lt;/script&gt;</code></pre>
+          </section>
+          <section data-menu-title="Validación">
+            <h3>Validación Props</h3>
+            <p><a href="https://vuejs.org/v2/guide/components-props.html" target="_blank">Documentación</a></p>
+            <p>Box1.vue</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div class="box effect"&gt;
+    &lt;h1&gt;{{ title }} - {{ myApellido }}&lt;/h1&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+data: function() {
+    return {
+    title: 'Componente Hijo'
+    };
+},
+props: {
+    myApellido: {
+    type: String,
+    required: false,
+    default: 'Apellido Papá'
+    }
+}
+};
+&lt;/script&gt;</code></pre>
+          </section>
+          <section data-menu-title="Custom Events #1">
+            <h3>Custom Events</h3>
+            <p>Box1.vue</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div class="box effect"&gt;
+    &lt;h1&gt;{{ title }} - {{ myApellido }}&lt;/h1&gt;
+    &lt;button @click="cambiarTitlePadre"&gt;Cambiar Title Componente Padre&lt;/button&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+data: function() {
+    return {
+    title: 'Componente Hijo',
+    mutationMyEdad: this.myEdad
+    };
+},
+props: {
+    myApellido: {
+    type: String,
+    required: false,
+    default: 'Apellido Papá'
+    },
+    myEdad: {
+    type: Number
+    }
+},
+methods: {
+    cambiarTitlePadre: function() {
+    this.mutationMyEdad += 50;
+    this.$emit('cambiarEdadPapa', this.mutationMyEdad);
+    }
+}
+};
+&lt;/script&gt;</code></pre>
+          </section>
+          <section data-menu-title="Custom Events #2">
+            <h3>Custom Events</h3>
+            <p>App.vue</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div&gt;
+    &lt;div class="box effect"&gt;
+    &lt;h1&gt;{{ title }} - {{ edad }}&lt;/h1&gt;
+    &lt;/div&gt;
+    &lt;app-box1 :myEdad="edad" @cambiarEdadPapa="edad = $event"&gt;&lt;/app-box1&gt;
+    &lt;app-box2 :myCaminarPadre="caminarPadre"&gt;&lt;/app-box2&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import Box1 from './components/Box1';
+import Box2 from './components/Box2';
+export default {
+data: function() {
+    return {
+    title: 'Componente Padre',
+    apellido: 'Apellido Padre',
+    edad: 50
+    };
+},
+methods: {
+    caminarPadre: function() {
+    alert('Caminando Estilo Papá');
+    }
+},
+components: {
+    appBox1: Box1,
+    appBox2: Box2
+}
+};
+&lt;/script&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Event Bus</h3>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">import Vue from 'vue'
+import App from './App.vue'
+
+export const eventBus = new Vue(); //Event Bus
+
+new Vue({
+el: '#app',
+render: h => h(App)
+})</code></pre>
+          </section>
+          <section>
+            <h3>Bus $on</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div class="box effect"&gt;
+    &lt;h1&gt;{{ title }} - {{ myApellido }}&lt;/h1&gt;
+    &lt;h3&gt;Mi edad: {{ edad }}&lt;/h3&gt;
+    &lt;button @click="cambiarTitlePadre"&gt;Cambiar Title Componente Padre&lt;/button&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import { eventBus } from '../main.js';
+export default {
+data: function() {
+    return {
+    title: 'Componente Hijo',
+    mutationMyEdad: this.myEdad,
+    edad: 20
+    };
+},
+created() {
+    eventBus.$on('cambiarEdad', edad =&gt; {
+    this.edad = edad;
+    });
+},
+props: {
+    myApellido: {
+    type: String,
+    required: false,
+    default: 'Apellido Papá'
+    },
+    myEdad: {
+    type: Number
+    }
+},
+methods: {
+    cambiarTitlePadre: function() {
+    this.mutationMyEdad += 50;
+    this.$emit('cambiarEdadPapa', this.mutationMyEdad);
+    }
+}
+};
+&lt;/script&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Bus $emit</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div class="box effect"&gt;
+    &lt;h1&gt;Componente Hijo #2&lt;/h1&gt;
+    &lt;button @click="myCaminarPadre"&gt;Caminar Estilo Papá&lt;/button&gt;
+    &lt;button @click="cambiarEdadHermano"&gt;Cambiar Edad Hermano&lt;/button&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import { eventBus } from '../main.js';
+export default {
+props: ['myCaminarPadre'],
+methods: {
+    cambiarEdadHermano: function() {
+    eventBus.$emit('cambiarEdad', 100);
+    }
+}
+};
+&lt;/script&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Slot</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div&gt;
+    &lt;div class="box effect"&gt;
+    &lt;h1&gt;{{ title }} - {{ edad }}&lt;/h1&gt;
+    &lt;/div&gt;
+    &lt;app-box1 :myEdad="edad" @cambiarEdadPapa="edad = $event"&gt;&lt;/app-box1&gt;
+    &lt;app-box2 :myCaminarPadre="caminarPadre"&gt;&lt;/app-box2&gt;
+    &lt;app-box3&gt;
+    &lt;h1&gt;Soy Box 3&lt;/h1&gt;
+    &lt;p&gt;{{ mensaje }}&lt;/p&gt;
+    &lt;/app-box3&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import Box1 from './components/Box1';
+import Box2 from './components/Box2';
+import Box3 from './components/Box3';
+export default {
+data: function() {
+    return {
+    title: 'Componente Padre',
+    apellido: 'Apellido Padre',
+    edad: 50,
+    mensaje: 'Hola Mundo'
+    };
+},
+methods: {
+    caminarPadre: function() {
+    alert('Caminando Estilo Papá');
+    }
+},
+components: {
+    appBox1: Box1,
+    appBox2: Box2,
+    appBox3: Box3
+}
+};
+&lt;/script&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Mostrando Slot</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div class="box effect"&gt;
+    &lt;slot&gt;&lt;/slot&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {};
+&lt;/script&gt;
+
+&lt;style&gt;
+&lt;/style&gt;</code></pre>
+          </section>
+          <section data-menu-title="Slot Multiple #1">
+            <h3>Slot Multiple</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div&gt;
+    &lt;div class="box effect"&gt;
+    &lt;h1&gt;{{ title }} - {{ edad }}&lt;/h1&gt;
+    &lt;/div&gt;
+    &lt;app-box1 :myEdad="edad" @cambiarEdadPapa="edad = $event"&gt;&lt;/app-box1&gt;
+    &lt;app-box2 :myCaminarPadre="caminarPadre"&gt;&lt;/app-box2&gt;
+    &lt;app-box3&gt;
+    &lt;h1 slot="title"&gt;Soy Box 3&lt;/h1&gt;
+    &lt;p slot="content"&gt;{{ mensaje }}&lt;/p&gt;
+    &lt;/app-box3&gt;
+&lt;/div&gt;
+&lt;/template&gt;</code></pre>
+          </section>
+          <section data-menu-title="Slot Multiple #2">
+            <h3>Slot Multiple</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div&gt;
+    &lt;div class="box effect"&gt;
+    &lt;h1&gt;{{ title }} - {{ edad }}&lt;/h1&gt;
+    &lt;/div&gt;
+    &lt;app-box1 :myEdad="edad" @cambiarEdadPapa="edad = $event"&gt;&lt;/app-box1&gt;
+    &lt;app-box2 :myCaminarPadre="caminarPadre"&gt;&lt;/app-box2&gt;
+    &lt;app-box3&gt;
+    &lt;h1 slot="title"&gt;Soy Box 3&lt;/h1&gt;
+    &lt;p slot="content"&gt;{{ mensaje }}&lt;/p&gt;
+    &lt;/app-box3&gt;
+&lt;/div&gt;
+&lt;/template&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Default Slot</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div class="box effect"&gt;
+    &lt;slot name="title"&gt;&lt;/slot&gt;
+    &lt;!-- Slot Default --&gt;
+    &lt;p&gt;&lt;slot name="textDefault"&gt;Text Default&lt;/slot&gt;&lt;/p&gt;
+    &lt;slot name="content"&gt;&lt;/slot&gt;
+&lt;/div&gt;
+&lt;/template&gt;</code></pre>
+          </section>
+          <section data-menu-title="Dinámicos">
+            <h3>Componentes Dinámicos</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div&gt;
+    &lt;div class="box effect"&gt;
+    &lt;h1&gt;{{ title }} - {{ edad }}&lt;/h1&gt;
+    &lt;/div&gt;
+    &lt;app-box1 :myEdad="edad" @cambiarEdadPapa="edad = $event"&gt;&lt;/app-box1&gt;
+    &lt;app-box2 :myCaminarPadre="caminarPadre"&gt;&lt;/app-box2&gt;
+    &lt;app-box3&gt;
+    &lt;h1 slot="title"&gt;Soy Box 3&lt;/h1&gt;
+    &lt;p slot="content"&gt;{{ mensaje }}&lt;/p&gt;
+    &lt;/app-box3&gt;
+    &lt;hr&gt;
+    &lt;button @click="selectComponent = 'appComponentA'"&gt;Componente A&lt;/button&gt;
+    &lt;button @click="selectComponent = 'appComponentB'"&gt;Componente B&lt;/button&gt;
+    &lt;button @click="selectComponent = 'appComponentC'"&gt;Componente C&lt;/button&gt;
+    &lt;component :is="selectComponent"&gt;&lt;/component&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import Box1 from './components/Box1';
+import Box2 from './components/Box2';
+import Box3 from './components/Box3';
+import ComponentA from './components/A';
+import ComponentB from './components/B';
+import ComponentC from './components/C';
+export default {
+data: function() {
+    return {
+    title: 'Componente Padre',
+    apellido: 'Apellido Padre',
+    edad: 50,
+    mensaje: 'Hola Mundo',
+    selectComponent: 'appComponentA'
+    };
+},
+methods: {
+    caminarPadre: function() {
+    alert('Caminando Estilo Papá');
+    }
+},
+components: {
+    appBox1: Box1,
+    appBox2: Box2,
+    appBox3: Box3,
+    appComponentA: ComponentA,
+    appComponentB: ComponentB,
+    appComponentC: ComponentC
+}
+};
+&lt;/script&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Keeping</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div&gt;
+    &lt;div class="box effect"&gt;
+    &lt;h1&gt;{{ title }} - {{ edad }}&lt;/h1&gt;
+    &lt;/div&gt;
+    &lt;app-box1 :myEdad="edad" @cambiarEdadPapa="edad = $event"&gt;&lt;/app-box1&gt;
+    &lt;app-box2 :myCaminarPadre="caminarPadre"&gt;&lt;/app-box2&gt;
+    &lt;app-box3&gt;
+    &lt;h1 slot="title"&gt;Soy Box 3&lt;/h1&gt;
+    &lt;p slot="content"&gt;{{ mensaje }}&lt;/p&gt;
+    &lt;/app-box3&gt;
+    &lt;hr&gt;
+    &lt;button @click="selectComponent = 'appComponentA'"&gt;Componente A&lt;/button&gt;
+    &lt;button @click="selectComponent = 'appComponentB'"&gt;Componente B&lt;/button&gt;
+    &lt;button @click="selectComponent = 'appComponentC'"&gt;Componente C&lt;/button&gt;
+    &lt;keep-alive&gt;
+    &lt;component :is="selectComponent"&gt;&lt;/component&gt;
+    &lt;/keep-alive&gt;
+&lt;/div&gt;
+&lt;/template&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Ciclo de Vida</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;script&gt;
+export default {
+beforeCreate: function() {
+    console.log(
+    'Se ejecuta antes de observar la data () y antes de iniciar eventos, luego de obeservar la data y iniciar eventos.'
+    );
+},
+created: function() {
+    console.log(
+    'Podrá acceder a los datos reactivos y los eventos estarán activos. Las plantillas y el DOM virtual aún  no se han montado o renderizado'
+    );
+},
+beforeMount: function() {
+    console.log('Se ejecuta antes de ser insertado en el DOM');
+},
+mounted: function() {
+    console.log('Momento ya se encuentra montada la vista en el DOM. ');
+},
+beforeUpdate: function() {
+    console.log('Se ejecuta cuando cambia la data()');
+},
+update: function() {
+    console.log('Se ejecuta cuando cambia la data()');
+},
+beforeDestroy: function() {
+    console.log(
+    'Se ejecuta justo antes del desmontaje. Su componente aún estará completamente presente y funcional. Si  necesita limpiar eventos, beforeDestroy probablemente sea el momento de hacerlo. '
+    );
+},
+destroyed: function() {
+    console.log('Se ejecuta cuando se destruye el elemento del DOM ');
+}
+};
+&lt;/script&gt;</code></pre>
           </section>
         </section>
       </div>
