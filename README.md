@@ -6,11 +6,13 @@
 
 ### Índice
 
-*   [Descripción](#descripción)
-*   [Contenido](#contenido)
-*   [Links](#links)
-*   [Licencia](#licencia)
-*   [Autor Info](#autor-info)
+- [Curso de VueJS](#curso-de-vuejs)
+        - [Índice](#indice)
+    - [Descripción](#descripcion)
+    - [Contenido](#contenido)
+    - [Links](#links)
+    - [Licencia](#licencia)
+    - [Autor Info](#autor-info)
 
 ---
 
@@ -47,9 +49,9 @@ VueJS es un framework progresivo de javascript para construir interfaces web int
     *   Validar Datos
     *   Eventos
     *   Comunicación mediante el Evento Bus
-    *   pasando Datos entre Eventos
-    *   Slots
+    *   Pasando Datos entre Eventos
     *   Componentes Dinámicos
+    *   Slots
     *   Keeping
     *   Ciclo de Vida
 
