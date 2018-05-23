@@ -1231,6 +1231,352 @@ destroyed: function() {
 &lt;/script&gt;</code></pre>
           </section>
         </section>
+        <section>
+          <section>
+            <h1>Vue-Router</h1>
+          </section>
+          <section>
+            <h3>SPA</h3><img src="/img/spa.png"/>
+          </section>
+          <section>
+            <h3>Qué es?</h3>
+            <p>Crear una aplicación de una sola página (SPA por sus siglas en inglés) con Vue.js + vue-router es muy sencillo. Con Vue.js, ya estamos estructurando nuestra aplicación con componentes. Cuando agregamos vue-router, todo lo que debemos hacer es mapear nuestros componentes a las rutas e informar a vue-router donde renderizarlas.</p>
+          </section>
+          <section>
+            <h3>Instalación</h3>
+            <p>npm install vue-router</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">import Vue from 'vue'
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)</code></pre>
+          </section>
+          <section data-menu-title="Registrando #1">
+            <h3>Registrando Rutas</h3>
+            <p>routes.js</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">import Home from './Home.vue';
+import Contact from './Contact.vue';
+export const routes = [{
+    path: '/',
+    component: Home
+}, {
+    path: '/contact',
+    component: Contact
+}]</code></pre>
+          </section>
+          <section data-menu-title="Registrando #2">
+            <h3>Registrando Rutas</h3>
+            <p>main.js</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">import Vue from 'vue'
+import App from './App.vue'
+import VueRouter from 'vue-router'
+import {
+routes
+} from './routes';
+Vue.use(VueRouter);
+const router = new VueRouter({
+routes
+});
+new Vue({
+    el: '#app',
+    router,
+    render: h => h(App)
+})</code></pre>
+          </section>
+          <section>
+            <h3>Mostrar Rutas</h3>
+            <p>Vue.app</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div&gt;
+    &lt;h3&gt;Mis Rutas&lt;/h3&gt;
+    &lt;hr&gt;
+    &lt;router-view&gt;&lt;/router-view&gt;
+&lt;/div&gt;
+&lt;/template&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Modo History</h3>
+            <p>main.js</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">import Vue from 'vue'
+import App from './App.vue'
+import VueRouter from 'vue-router'
+import {
+routes
+} from './routes';
+Vue.use(VueRouter);
+const router = new VueRouter({
+routes,
+mode: 'history'
+});
+new Vue({
+    el: '#app',
+    router,
+    render: h => h(App)
+})</code></pre>
+          </section>
+          <section data-menu-title="Navegación #1">
+            <h3>Navegación</h3>
+            <p>Header.vue</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;ul class="nav"&gt;
+    &lt;li&gt;&lt;router-link to="/"&gt;Home&lt;/router-link&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;router-link to="/contact"&gt;Contact&lt;/router-link&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {};
+&lt;/script&gt;
+&lt;style&gt;
+ul.nav {
+list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+}
+ul.nav li {
+    display: inline;
+    padding-right: 20px;
+}
+ul.nav a,
+ul.nav a:visited {
+    font-family: sans-serif;
+    color: #900;
+}
+ul.nav a:hover,
+ul.nav a:active,
+ul.nav a:focus {
+    color: #c33;
+}
+&lt;/style&gt;</code></pre>
+          </section>
+          <section data-menu-title="Navegación #2">
+            <h3>Navegación</h3>
+            <p>Header.vue</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div&gt;
+    &lt;app-header&gt;&lt;/app-header&gt;
+    &lt;h1&gt;Página Home&lt;/h1&gt;
+    &lt;p&gt;Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex in totam, similique omnis expedita nesciunt beatae rem, quasi repellat eaque nihil quidem ab unde architecto nobis excepturi veniam? Ipsa, tenetur?&lt;/p&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import Header from './Header';
+export default {
+components: {
+    appHeader: Header
+}
+};
+&lt;/script&gt;
+&lt;style&gt;
+&lt;/style&gt;</code></pre>
+          </section>
+          <section data-menu-title="Navegación #3">
+            <h3>Navegación desde el Código</h3>
+            <p>Contact.vue</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div&gt;
+    &lt;app-header&gt;&lt;/app-header&gt;
+    &lt;h1&gt;Página Contacto&lt;/h1&gt;
+    &lt;button @click="navigateHome"&gt;Home&lt;/button&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import Header from './Header';
+export default {
+methods: {
+    navigateHome: function() {
+    this.$router.push('/');
+    }
+},
+components: {
+    appHeader: Header
+}
+};
+&lt;/script&gt;
+&lt;style&gt;
+&lt;/style&gt;</code></pre>
+          </section>
+          <section data-menu-title="Parámetros #1">
+            <h3>Rutas con Parámetros</h3>
+            <p>routes.js</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">import Home from './Home.vue';
+import Contact from './Contact.vue';
+import Work from './Work.vue';
+export const routes = [{
+    path: '/',
+    component: Home
+}, {
+    path: '/contact',
+    component: Contact
+}, {
+    path: '/work/:id',
+    component: Work
+}]</code></pre>
+          </section>
+          <section data-menu-title="Parámetros #2">
+            <h3>Rutas con Parámetros</h3>
+            <p>Header.vue</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;ul class="nav"&gt;
+    &lt;li&gt;&lt;router-link to="/"&gt;Home&lt;/router-link&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;router-link to="/contact"&gt;Contact&lt;/router-link&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;router-link to="/work/5"&gt;Work&lt;/router-link&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/template&gt;</code></pre>
+          </section>
+          <section data-menu-title="Parámetros #3">
+            <h3>Recuperar Parámetros</h3>
+            <p>Work.vue</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div&gt;
+    &lt;app-header&gt;&lt;/app-header&gt;
+    &lt;h1&gt;Páginas Trabajos&lt;/h1&gt;
+    &lt;p&gt;Id del Trabajo: {{ id }}&lt;/p&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import Header from './Header';
+export default {
+data: function() {
+    return {
+    id: this.$route.params.id
+    };
+},
+components: {
+    appHeader: Header
+}
+};
+&lt;/script&gt;
+&lt;style&gt;
+&lt;/style&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Estilos</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;ul class="nav"&gt;
+    &lt;li&gt;&lt;router-link exact active-class="li-active" to="/"&gt;Home&lt;/router-link&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;router-link exact active-class="li-active" to="/contact"&gt;Contact&lt;/router-link&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;router-link exact active-class="li-active" to="/work/5"&gt;Work&lt;/router-link&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {};
+&lt;/script&gt;
+&lt;style&gt;
+ul.nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+}
+ul.nav li {
+    display: inline;
+    padding-right: 20px;
+}
+ul.nav a,
+ul.nav a:visited {
+    font-family: sans-serif;
+    color: #900;
+}
+ul.nav a:hover,
+ul.nav a:active,
+ul.nav a:focus {
+    color: #c33;
+}
+.li-active {
+    padding: 10px;
+    background-color: #f96;
+}
+&lt;/style&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Router Go</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div&gt;
+    &lt;app-header&gt;&lt;/app-header&gt;
+    &lt;h1&gt;Página Contacto&lt;/h1&gt;
+    &lt;button @click="navigateHome"&gt;Home&lt;/button&gt;
+    &lt;button @click="$router.go(-1)"&gt;Atras&lt;/button&gt;
+&lt;/div&gt;
+&lt;/template&gt;</code></pre>
+          </section>
+          <section data-menu-title="Rutas Anidadas #1">
+            <h3>Rutas Anidadas</h3>
+            <p>routes.js</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;ul class="nav"&gt;
+    &lt;li&gt;&lt;router-link exact active-class="li-active" to="/"&gt;Home&lt;/router-link&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;router-link exact active-class="li-active" to="/contact"&gt;Contact&lt;/router-link&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;router-link exact active-class="li-active" to="/work/5"&gt;Work&lt;/router-link&gt;&lt;/li&gt;
+&lt;li&gt;
+    &lt;router-link to="/admin"&gt;Admin&lt;/router-link&gt;
+    &lt;ul&gt;
+    &lt;li&gt;&lt;router-link to="/profile"&gt;Profile&lt;/router-link&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {};
+&lt;/script&gt;
+&lt;style&gt;
+&lt;/style&gt;</code></pre>
+          </section>
+          <section data-menu-title="Rutas Anidadas #2">
+            <h3>Rutas Anidadas</h3>
+            <p>routes.js</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">import Home from './Home.vue';
+import Contact from './Contact.vue';
+import Work from './Work.vue';
+import Admin from './Admin.vue';
+import AdminMain from './AdminMain.vue';
+import AdminProfile from './AdminProfile.vue';
+export const routes = [{
+path: '/',
+component: Home
+}, {
+path: '/contact',
+component: Contact
+}, {
+path: '/work/:id',
+component: Work
+}, {
+  path: '/admin',
+  component: Admin,
+  children: [
+       {
+          path: '',
+          component: AdminMain
+      },
+      {
+          path: '/profile',
+          component: AdminProfile
+      }
+  ]
+}]</code></pre>
+          </section>
+          <section data-menu-title="Rutas Anidadas #3">
+            <h3>Rutas Anidadas</h3>
+            <p>Admin.vue</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;div&gt;
+    &lt;app-header&gt;&lt;/app-header&gt;
+    &lt;router-view&gt;&lt;/router-view&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import Header from './Header';
+export default {
+components: {
+    appHeader: Header
+}
+};
+&lt;/script&gt;
+&lt;style&gt;
+&lt;/style&gt;</code></pre>
+          </section>
+        </section>
       </div>
     </div>
   </body>
