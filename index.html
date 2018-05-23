@@ -1576,6 +1576,193 @@ components: {
 &lt;style&gt;
 &lt;/style&gt;</code></pre>
           </section>
+          <section data-menu-title="Rutas Nombradas #1">
+            <h3>Rutas Nombradas</h3>
+            <p>routes.js</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">export const routes = [{
+path: '/',
+    name: 'home',
+    component: Home
+}, {
+    path: '/contact',
+    component: Contact
+}, {
+    path: '/work/:id',
+    name: 'work',
+    component: Work
+}, {
+    path: '/admin',
+    component: Admin,
+    children: [{
+        path: '',
+        component: AdminMain
+    },
+    {
+        path: '/profile',
+        component: AdminProfile
+    }
+]
+}]</code></pre>
+          </section>
+          <section data-menu-title="Rutas Nombradas #2">
+            <h3>Rutas Nombradas</h3>
+            <p>Header.vue</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+    &lt;ul class="nav"&gt;
+        &lt;li&gt;&lt;router-link exact active-class="li-active" :to="{name: 'home'}"&gt;Home&lt;/router-link&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;router-link exact active-class="li-active" to="/contact"&gt;Contact&lt;/router-link&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;router-link exact active-class="li-active" :to="{name: 'work', params: {id: 10}}"&gt;Work&lt;/router-link&gt;&lt;/li&gt;
+        &lt;li&gt;
+            &lt;router-link to="/admin"&gt;Admin&lt;/router-link&gt;
+            &lt;ul&gt;
+            &lt;li&gt;&lt;router-link to="/profile"&gt;Profile&lt;/router-link&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/template&gt;</code></pre>
+          </section>
+          <section data-menu-title="Redirecciones #1">
+            <h3>Redirecciones</h3>
+            <p>routes.js</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">export const routes = [{
+    path: '/',
+    name: 'home',
+    component: Home
+}, {
+    path: '/inicio',
+    redirect: {
+    name: 'home'
+    }
+},
+{
+    path: '/contact',
+    component: Contact
+}, {
+    path: '/contacto',
+    redirect: '/contact'
+},
+{
+    path: '/work/:id',
+    name: 'work',
+    component: Work
+}, {
+    path: '/admin',
+    component: Admin,
+    children: [{
+        path: '',
+        component: AdminMain
+    },
+    {
+        path: '/profile',
+        component: AdminProfile
+    }
+    ]
+}
+]</code></pre>
+          </section>
+          <section data-menu-title="Redirecciones #2">
+            <h3>Redirecciones</h3>
+            <p>Header.vue</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+    &lt;ul class="nav"&gt;
+        &lt;li&gt;&lt;router-link exact active-class="li-active" :to="{name: 'home'}"&gt;Home&lt;/router-link&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;router-link to="/inicio"&gt;Inicio&lt;/router-link&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;router-link exact active-class="li-active" to="/contact"&gt;Contact&lt;/router-link&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;router-link exact active-class="li-active" to="/contacto"&gt;Contacto&lt;/router-link&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;router-link exact active-class="li-active" :to="{name: 'work', params: {id: 10}}"&gt;Work&lt;/router-link&gt;&lt;/li&gt;
+        &lt;li&gt;
+            &lt;router-link to="/admin"&gt;Admin&lt;/router-link&gt;
+            &lt;ul&gt;
+            &lt;li&gt;&lt;router-link to="/profile"&gt;Profile&lt;/router-link&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/template&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Alias</h3>
+            <p>routes.js</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">{
+    path: '/',
+    name: 'home',
+    alias: '/home',
+    component: Home
+}</code></pre>
+          </section>
+          <section data-menu-title="Props #1">
+            <h3>Pasando Props</h3>
+            <p>routes.js</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">export const routes = [{
+    path: '/',
+    name: 'home',
+    alias: '/home',
+    component: Home
+}, {
+    path: '/inicio',
+    redirect: {
+    name: 'home'
+    }
+},
+{
+    path: '/mensaje/:txt',
+    component: Mensaje,
+    props: true
+},
+{
+    path: '/mi-mensaje/',
+    component: Mensaje,
+    props: {
+    txt: 'Hola desde La Ruta'
+    }
+},
+{
+    path: '/contact',
+    component: Contact
+}, {
+    path: '/contacto',
+    redirect: '/contact'
+},
+{
+    path: '/work/:id',
+    name: 'work',
+    component: Work
+}, {
+    path: '/admin',
+    component: Admin,
+    children: [{
+        path: '',
+        component: AdminMain
+    },
+    {
+        path: '/profile',
+        component: AdminProfile
+    }
+    ]
+}
+]</code></pre>
+          </section>
+          <section data-menu-title="Props #2">
+            <h3>Pasando Props</h3>
+            <p>Mensaje.vue</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+    &lt;h1&gt;Componente Mensaje / {{ txt }}&lt;/h1&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+props: {
+    txt: {
+    type: String,
+    default: 'Mensaje por Defecto'
+    }
+}
+};
+&lt;/script&gt;</code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Axios</h1>
+          </section>
         </section>
       </div>
     </div>
