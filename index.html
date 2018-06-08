@@ -1876,6 +1876,335 @@ methods: {
           <section>
             <h1>Mini-Proyecto</h1>
           </section>
+          <section>
+            <h1>Vue Cli</h1>
+            <p>vue init webpack-simple vue-cine</p>
+          </section>
+          <section>
+            <h3>Paquetes</h3>
+            <ul>
+              <li>npm install axios</li>
+              <li>npm install vuetify --save</li>
+              <li>npm install vue-router</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Setup</h3>
+            <p>main.js</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">import Vue from 'vue';
+import App from './App.vue';
+import Vuetify from 'vuetify';
+import 'vuetify/dist/vuetify.min.css';
+import VueRouter from 'vue-router';
+import {
+    routes
+} from './routes';
+Vue.use(VueRouter)
+Vue.use(Vuetify)
+const router = new VueRouter({
+    routes,
+    mode: 'history'
+});
+new Vue({
+    el: '#app',
+    router,
+    render: h => h(App)
+})</code></pre>
+          </section>
+          <section>
+            <h3>Rutas</h3>
+            <p>router.js</p>
+            <pre><code class="javascript" data-trim="data-trim" data-noescape="data-noescape">import Home from './components/home/Home';
+export const routes = [{
+    path: '/',
+    name: 'Home',
+    component: Home
+}]</code></pre>
+          </section>
+          <section>
+            <h3><a href="https://github.com/asika32764/vue2-animate" target="_blank">Vue Animate</a></h3>
+            <p>index.html</p>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;VueCine&lt;/title&gt;
+    &lt;link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet"&gt;
+    &lt;link rel="stylesheet" href="css/vue2-animate.min.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="app"&gt;&lt;/div&gt;
+    &lt;script src="/dist/build.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </section>
+          <section>
+            <h3>App.vue</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+    &lt;router-view&gt;&lt;/router-view&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {};
+&lt;/script&gt;
+&lt;style&gt;
+&lt;/style&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Home.vue</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+    &lt;v-app&gt;
+        &lt;v-navigation-drawer fixed v-model="drawer" app&gt;
+            &lt;v-list dense&gt;
+                &lt;v-list-tile @click=""&gt;
+                    &lt;v-list-tile-action&gt;
+                        &lt;v-icon&gt;home&lt;/v-icon&gt;
+                    &lt;/v-list-tile-action&gt;
+                    &lt;v-list-tile-content&gt;
+                        &lt;v-list-tile-title&gt;Inicio&lt;/v-list-tile-title&gt;
+                    &lt;/v-list-tile-content&gt;
+                &lt;/v-list-tile&gt;
+                &lt;v-list-group prepend-icon="search" value="true" active-class="purple--text"&gt;
+                    &lt;v-list-tile slot="activator"&gt;
+                        &lt;v-list-tile-title&gt;Buscar&lt;/v-list-tile-title&gt;
+                    &lt;/v-list-tile&gt;
+                    &lt;v-list-group sub-group no-action active-class="purple--text"&gt;
+                        &lt;v-list-tile slot="activator"&gt;
+                            &lt;v-list-tile-title&gt;Año&lt;/v-list-tile-title&gt;
+                        &lt;/v-list-tile&gt;
+                        &lt;v-list-tile v-for="(age, i) in ages" :key="i" @click=""&gt;
+                            &lt;v-list-tile-title v-text="age" @click="buscar(age)"&gt;&lt;/v-list-tile-title&gt;
+                        &lt;/v-list-tile&gt;
+                    &lt;/v-list-group&gt;
+                    &lt;v-list-group sub-group no-action active-class="purple--text"&gt;
+                        &lt;v-list-tile slot="activator"&gt;
+                            &lt;v-list-tile-title&gt;Género&lt;/v-list-tile-title&gt;
+                        &lt;/v-list-tile&gt;
+                        &lt;v-list-tile v-for="(genre, i) in genres" :key="i" @click=""&gt;
+                            &lt;v-list-tile-title v-text="genre" @click="buscar(genre)"&gt;&lt;/v-list-tile-title&gt;
+                        &lt;/v-list-tile&gt;
+                    &lt;/v-list-group&gt;
+                &lt;/v-list-group&gt;
+            &lt;/v-list&gt;
+        &lt;/v-navigation-drawer&gt;
+        &lt;v-toolbar color="purple" dark fixed app&gt;
+            &lt;v-toolbar-side-icon @click.stop="drawer = !drawer"&gt;&lt;/v-toolbar-side-icon&gt;
+            &lt;v-toolbar-title&gt;VueCine&lt;/v-toolbar-title&gt;
+        &lt;/v-toolbar&gt;
+        &lt;v-content&gt;
+            &lt;app-header&gt;&lt;/app-header&gt;
+            &lt;app-body ref="appBody"&gt;&lt;/app-body&gt;
+        &lt;/v-content&gt;
+        &lt;!-- Footer --&gt;
+        &lt;v-footer dark app&gt;
+            &lt;v-container grid-list-xs class="text-xs-center"&gt;
+                &lt;span class="white--text"&gt;VueCine &copy; 2018&lt;/span&gt;
+            &lt;/v-container&gt;
+        &lt;/v-footer&gt;
+    &lt;/v-app&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import Header from './Header.vue';
+import Body from './Body.vue';
+import axios from 'axios';
+export default {
+data: () =&gt; ({
+    drawer: false,
+    ages: ['2016', '2015', '2014', '2013'],
+    genres: ['Action', 'Comedy', 'Cartoon', 'Terror'],
+    dataSearch: []
+}),
+props: {
+    source: String
+},
+methods: {
+    buscar(data) {
+    this.dataSearch = [];
+    axios
+        .get('http://www.omdbapi.com/?apikey=c53bd7a7&s='.concat(data))
+        .then(response =&gt; {
+        //console.log(response.data);
+        this.dataSearch = response.data.Search;
+        this.$refs.appBody.movies = this.dataSearch;
+        })
+        .catch(error =&gt; {
+        this.dataSearch = [];
+        console.log(error);
+        });
+    }
+},
+components: {
+    appHeader: Header,
+    appBody: Body
+}
+};
+&lt;/script&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Header.vue</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+    &lt;v-jumbotron src="/img/vue-cine.jpeg" dark&gt;
+        &lt;v-container fill-height&gt;
+            &lt;v-layout align-center&gt;
+                &lt;v-flex&gt;
+                    &lt;h3 class="display-3"&gt;Bienvenido a VueCine&lt;/h3&gt;
+                    &lt;span class="subheading"&gt;Lorem ipsum dolor sit amet, pri veniam forensibus id. Vis maluisset molestiae id, ad semper lobortis
+                        cum. At impetus detraxit incorrupte usu, repudiare assueverit ex eum, ne nam essent vocent admodum.&lt;/span&gt;
+                    &lt;v-divider class="my-3"&gt;&lt;/v-divider&gt;
+                    &lt;div class="title mb-3"&gt;Descubre todas las mejores películas en cartelera!&lt;/div&gt;
+                &lt;/v-flex&gt;
+            &lt;/v-layout&gt;
+        &lt;/v-container&gt;
+    &lt;/v-jumbotron&gt;
+&lt;/template&gt;</code></pre>
+          </section>
+          <section>
+            <h3>Body.vue</h3>
+            <pre><code class="html" data-trim="data-trim" data-noescape="data-noescape">&lt;template&gt;
+&lt;v-container grid-list-xs&gt;
+    &lt;transition name="slideUp" appear&gt;
+    &lt;v-layout row wrap class="mt-4 mb-4"&gt;
+        &lt;template v-for="(movie, index) in movies"&gt;
+        &lt;v-flex xs4&gt;
+            &lt;v-card class="mx-2 mb-1"&gt;
+            &lt;v-card-media class="white--text" height="200px" :src="movie.Poster"&gt;
+                &lt;v-container fill-height fluid&gt;
+                &lt;v-layout fill-height&gt;
+                    &lt;v-flex xs12 align-end flexbox&gt;
+                    &lt;span class="headline"&gt;{{ movie.Title }}&lt;/span&gt;
+                    &lt;/v-flex&gt;
+                &lt;/v-layout&gt;
+                &lt;/v-container&gt;
+            &lt;/v-card-media&gt;
+            &lt;v-card-title&gt;
+                &lt;div&gt;
+                &lt;span class="grey--text"&gt;Año: {{ movie.Year }}&lt;/span&gt;
+                &lt;br&gt;
+                &lt;span&gt;Título: {{ movie.Title }}&lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/v-card-title&gt;
+            &lt;v-card-actions&gt;
+                &lt;v-btn flat color="primary"&gt;Compartir&lt;/v-btn&gt;
+                &lt;v-btn flat color="purple" @click="showMovie(movie.imdbID)"&gt;Más Información&lt;/v-btn&gt;
+            &lt;/v-card-actions&gt;
+            &lt;/v-card&gt;
+        &lt;/v-flex&gt;
+        &lt;/template&gt;
+    &lt;/v-layout&gt;
+    &lt;/transition&gt;
+    &lt;!--  *** My Modal Start *** --&gt;
+    &lt;v-dialog v-model="showModal" max-width="500px"&gt;
+    &lt;v-card&gt;
+        &lt;template v-if="loading"&gt;
+        &lt;v-card-title&gt;
+            &lt;h3&gt;Cargando...&lt;/h3&gt;
+        &lt;/v-card-title&gt;
+        &lt;v-card-text class="text-xs-center"&gt;
+            &lt;v-progress-circular :size="70" :width="7" indeterminate color="purple"&gt;&lt;/v-progress-circular&gt;
+        &lt;/v-card-text&gt;
+        &lt;v-card-actions&gt;
+            &lt;v-btn color="primary" flat @click.stop="closeModal"&gt;Cerrar&lt;/v-btn&gt;
+        &lt;/v-card-actions&gt;
+        &lt;/template&gt;
+        &lt;template v-else&gt;
+        &lt;v-card-media class="white--text" :src="modalInfo.poster" height="200px"&gt;
+            &lt;v-container fill-height fluid&gt;
+            &lt;v-layout fill-height&gt;
+                &lt;v-flex xs12 align-end flexbox&gt;
+                &lt;span class="headline"&gt;{{ modalInfo.title }}&lt;/span&gt;
+                &lt;/v-flex&gt;
+            &lt;/v-layout&gt;
+            &lt;/v-container&gt;
+        &lt;/v-card-media&gt;
+        &lt;v-card-title&gt;
+            &lt;h3&gt;{{ modalInfo.title }}&lt;/h3&gt;
+        &lt;/v-card-title&gt;
+        &lt;v-card-text&gt;
+            &lt;p&gt;
+            &lt;strong&gt;Año:&lt;/strong&gt;{{ modalInfo.age }}&lt;/p&gt;
+            &lt;p&gt;
+            &lt;strong&gt;Min:&lt;/strong&gt;{{ modalInfo.min }}&lt;/p&gt;
+            &lt;p&gt;
+            &lt;strong&gt;Género:&lt;/strong&gt;{{ modalInfo.genre }}&lt;/p&gt;
+            &lt;p&gt;
+            &lt;strong&gt;Director:&lt;/strong&gt;{{ modalInfo.director }}&lt;/p&gt;
+            &lt;p&gt;
+            &lt;strong&gt;Actores:&lt;/strong&gt;{{ modalInfo.actors }}&lt;/p&gt;
+        &lt;/v-card-text&gt;
+        &lt;v-card-actions&gt;
+            &lt;v-btn color="primary" flat @click.stop="closeModal"&gt;Cerrar&lt;/v-btn&gt;
+        &lt;/v-card-actions&gt;
+        &lt;/template&gt;
+    &lt;/v-card&gt;
+    &lt;/v-dialog&gt;
+    &lt;!--  *** My Modal End *** --&gt;
+&lt;/v-container&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import axios from 'axios';
+export default {
+data() {
+    return {
+    movies: [],
+    showModal: false,
+    loading: false,
+    modalInfo: {
+        title: '',
+        age: '',
+        min: '',
+        genre: '',
+        director: '',
+        poster: ''
+    }
+    };
+},
+created() {
+    this.moviesDefault();
+},
+methods: {
+    closeModal() {
+    this.showModal = false;
+    this.modalInfo.title = '';
+    this.modalInfo.age = '';
+    this.modalInfo.min = '';
+    this.modalInfo.genre = '';
+    this.modalInfo.director = '';
+    this.modalInfo.poster = '';
+    this.modalInfo.actors = '';
+    },
+    showMovie(id) {
+    this.showModal = true;
+    this.loading = true;
+    axios
+        .get('http://www.omdbapi.com/?apikey=c53bd7a7&i='.concat(id))
+        .then(response =&gt; {
+        this.modalInfo.title = response.data.Title;
+        this.modalInfo.age = response.data.Year;
+        this.modalInfo.min = response.data.Runtime;
+        this.modalInfo.genre = response.data.Genre;
+        this.modalInfo.director = response.data.Director;
+        this.modalInfo.poster = response.data.Poster;
+        this.modalInfo.actors = response.data.Actors;
+        this.loading = false;
+        })
+        .catch(error =&gt; {
+        console.log(Error);
+        this.showModal = false;
+        this.loading = false;
+        });
+    },
+    moviesDefault() {
+    axios.get('http://www.omdbapi.com/?apikey=c53bd7a7&s=2016').then(response =&gt; {
+        this.movies = response.data.Search;
+    });
+    }
+}
+};
+&lt;/script&gt;</code></pre>
+          </section>
+        </section>
+        <section>
+          <h3>Gracias</h3>
+          <p>La mayoría de los buenos programadores programan no porque esperan que les pagen o que el público los adore, sino porque programar es divertido.</p>
         </section>
       </div>
     </div>
